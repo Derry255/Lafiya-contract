@@ -1,25 +1,36 @@
-## Description
-<!-- Provide a clear summary of the changes and the motivation/context behind them. -->
+## Summary
 
-## Type of Change
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] Documentation update
+What does this PR change, and why?
 
-## Quality Checklist
-- [ ] Code follows the style guidelines of this project
-- [ ] I have run `make check` locally and it passes with no warnings or errors
-- [ ] I have added unit tests covering success, failure, and authorization cases
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have updated the documentation / README if applicable
+Closes # <!-- issue number -->
 
-## Cross-Repo & Shared-Contract Impact
-- [ ] **Does this PR change a shared contract interface?** (e.g., attestation schema, public contract function signatures, events emitted)
-  - If yes, please describe the impact and link the corresponding issue/PR in [lafiya-web](https://github.com/Lafiya-xyz/lafiya-web):
-  - *Impact detail:* 
+## Checklist
 
-- [ ] **Does this PR require a database/Supabase migration?**
-  - If yes, verify that:
-    - [ ] The migration SQL is written in `lafiya-web`.
-    - [ ] Hand-authored types in `lafiya-web/lib/supabase/types.ts` have been updated manually.
+The expectations below come from [CONTRIBUTING.md](CONTRIBUTING.md) —
+see it for the full workflow and rationale.
+
+- [ ] `make check` passes locally (`fmt` + `clippy` + `test` + wasm
+      build — the same steps CI runs)
+- [ ] Tests added or updated: every new contract function has unit tests
+      covering both the success path and the failure/authorization paths
+      (see `contracts/*/src/test.rs` for patterns)
+- [ ] `CHANGELOG.md` updated under `Unreleased`
+- [ ] `Cargo.lock` is committed and up to date
+- [ ] Docs updated (`README.md`, `docs/`) if behavior, error codes, or
+      workflow changed
+- [ ] Cross-contract calls go through a `#[contractclient]` trait
+      interface, not a direct crate dependency
+- [ ] No real personal or health data (including test fixtures that
+      could be mistaken for it) is included in this change
+
+## Schema / cross-repo impact
+
+- [ ] This PR does **not** change contract function signatures or the
+      attestation schema — **or** the change is flagged here so
+      `lafiya-web` can be updated in the same change set (see the
+      README's Shared Contracts section).
+
+## Notes for reviewers
+
+Anything reviewers should look at first, or follow-ups deliberately left
+out of scope.
